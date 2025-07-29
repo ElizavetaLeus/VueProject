@@ -1,11 +1,11 @@
 <template>
-<input 
-    type="text"
-    :value="value"
-    :placeholder="placeholder"
-    :class="$style.filterInput"
-    @input="handlerInput($event)"
-/>
+    <input 
+        type="text"
+        :value="value"
+        :placeholder="placeholder"
+        :class="$style.filterInput"
+        @input="handlerInput($event)"
+    />
 </template>
 
 <script setup>
@@ -32,9 +32,7 @@ const handlerInput = (event)=>{
 
 <style module>
 .filterInput {
-    margin-inline-end: 4px;
-    width: 266px;
-    height: 40px;
+    height: 100%;
     padding: 13px 15px;
     border-radius: 5px;
     font-size: 14px;
