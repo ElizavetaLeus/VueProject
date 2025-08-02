@@ -1,23 +1,20 @@
 <template>
   <div class="container">
     <h1 :class="$style.title">Пользователи</h1>
-    <div :class="$style.filters">
-      <FieldSearch 
-        :value="inputValue"
-        placeholder="Поиск"
-        @input="printValue($event)"
-        :class="$style.fieldSearch"
-      />
-      <button @click="getValueByClick()"> Click </button>
+    <div>
+      <FilterUsers 
+      :inputValue="inputValue" 
+      @setInputValue="setInputValue($event)" 
+      @setUserRole="setUserRole($event)"/>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import FieldSearch from '@/components/FieldSearch.vue';
+import FilterUsers from '@/components/FilterUsers.vue';
 
-const UserList = [
+const userList = [
   { id: 1001, name: 'Пользователь 1', role: 'user' },
   { id: 1002, name: 'Пользователь 2', role: 'admin' },
   { id: 1003, name: 'Пользователь 3', role: 'admin' },
@@ -26,14 +23,28 @@ const UserList = [
   { id: 1006, name: 'Пользователь 6', role: 'user' }
 ];
 const inputValue = ref('');
+const userRole = ref('all')
 
-const printValue = (value)=>{
-  inputValue.value =value;
-}
-const getValueByClick = () => {
-  console.log(inputValue.value);
+const setUserRole = (role) => {
+  userRole.value = role;
+  const newUserList = userList.filter((user) => {
+    if (role === 'all') {
+      return true;
+    }
+    return user.role === role;
+  })
+  console.log(newUserList);
   
 }
+const setInputValue = (value) => {
+  inputValue.value = value;
+  const newUserList = userList.filter(user => {
+    return user.name.includes(value);
+  })
+  console.log(newUserList);
+}
+
+
 </script>
 
 <style module>
@@ -42,13 +53,5 @@ const getValueByClick = () => {
   font-size: 26px;
   font-weight: 400;
 }
-.filters{
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 40px;
-}
-.fieldSearch {
-  max-width: 266px;
-  margin-inline-end: 4px;
-}
+
 </style>
