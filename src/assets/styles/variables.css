@@ -1,8 +1,10 @@
 body {
     --font-family-primary: 'Roboto', sans-serif;
+    --color-dark-gray-base: 131, 148, 167;
     --color-white: #ffffff;
     --color-gray: #f6f8fc;
-    --color-dark-gray: #8394a7;
+    --color-dark-gray: rgb(var(--color-dark-gray-base));
+    --color-dark-gray-10: rgb(var(--color-dark-gray-base), 10%);
     --color-pink: #ee4382;
     --color-violet: #934af9;
     --color-blue: #4361ee;

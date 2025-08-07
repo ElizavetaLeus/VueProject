@@ -2,20 +2,20 @@
   <div :class="$style.filters">
     <div :class="$style.buttonList">
         <AppButton
-        v-for="button in buttonList"
-        :key="button.id"
-        :text="button.text"
-        :type="button.type"
-        :isActive="button.isActive"
-        :role="button.role"
-        @click="changeActiveButton(button.role)"
+          v-for="button in buttonList"
+          :key="button.id"
+          :text="button.text"
+          :type="button.type"
+          :isActive="button.isActive"
+          :role="button.role"
+          @click="changeActiveButton(button.role)"
         />
     </div>
     <AppInputText 
-      :class="$style.fieldSearch"
-      :value="inputValue"
-      placeholder="Поиск"
-      @input="setInputValue($event)"
+        :class="$style.fieldSearch"
+        :value="inputValue"
+        placeholder="Поиск"
+        @input="setInputValue($event)"
     />
   </div>
 </template>
