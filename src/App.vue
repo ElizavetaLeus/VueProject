@@ -42,17 +42,18 @@ const filters = ref({
 
 const setFilter = (params) => {
   if (params.type === 'setInputValue') {
-    filters.value.role = params.value;
+    filters.value.query = params.value;
   }
   if (params.type === 'setUserRole') {
-    filters.value.query = params.value;
+    filters.value.role = params.value;
   }
 }
 
 const userList = computed(() => {
   return userListDefault.filter((user) => {
-    return user.role === filters.value.role
-    && user.name.toLowerCase().includes(filters.value.query.toLowerCase())
+    const hasUserRoleOrAll = user.role === filters.value.role || filters.value.role === 'all';
+    const hasUserNameQuery = user.name.toLowerCase().includes(filters.value.query.toLowerCase());
+    return hasUserRoleOrAll && hasUserNameQuery;
   })
 })
 
