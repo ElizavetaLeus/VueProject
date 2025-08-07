@@ -13,6 +13,7 @@ export default defineConfig([
       indent: ['error', 2],
       'vue/html-indent': ['error', 2],
       'no-multi-spaces': 'error',
+      'no-console': 'error',
     } 
   },
   pluginVue.configs["flat/essential"],
