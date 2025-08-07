@@ -1,10 +1,11 @@
 <template>
   <button 
-  :class="classList"
-  @click="clickListener()"
-  :type="type"
-  :isActive="isActive">
-  {{ text }}
+    :class="classList"
+    @click="clickListener()"
+    :type="type"
+    :isActive="isActive"
+  >
+    {{ text }}
   </button>
 </template>
 

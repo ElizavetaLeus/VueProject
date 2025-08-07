@@ -9,9 +9,8 @@
 
 <script setup>
 import { computed, useCssModule } from 'vue';
-import AppIcons from './AppIcon.vue';
 import { icons } from '@/icons/icons.js';
-import AppIcon from './AppIcon.vue';
+import AppIcon from '@/AppIcon.vue';
 
 const $style = useCssModule();
 const props = defineProps({
@@ -24,8 +23,8 @@ const props = defineProps({
 const getUserCardClasslist = computed(() => {
   return [
     $style.userCardRole,
-    user.role === 'admin' && $style.userCardRoleAdmin,
-    user.role === 'editor' && $style.userCardRoleEditor
+    props.user.role === 'admin' && $style.userCardRoleAdmin,
+    props.user.role === 'editor' && $style.userCardRoleEditor
   ]
 })
 </script>

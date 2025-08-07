@@ -1,9 +1,9 @@
 <template>
-<div
-  :class="$style.icon"
-  v-html="icons.userIcon"
->
-</div>
+  <div
+    :class="$style.icon"
+    v-html="icons.userIcon"
+  >
+  </div>
 </template>
 
 <script setup>
