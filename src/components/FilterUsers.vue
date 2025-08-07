@@ -25,6 +25,7 @@ import { ref } from 'vue';
 import AppButton from '@/components/ui/AppButton.vue';
 import AppInputText from '@/components/ui/AppInputText.vue';
 
+const inputValue = ref('');
 defineProps({
   inputValue: {
     type: String,
@@ -36,10 +37,13 @@ const buttonList = ref([
   { id:12, text: 'Админы', isActive: false, type: 'pink', role: 'admin' },
   { id:12, text: 'Редакторы', isActive: false, type: 'violet', role: 'editor' }
 ])
-const emits = defineEmits(['setInputValue', 'setUserRole']);
-
+const emits = defineEmits(['filterUsers']);
+const filterUsers = (params) => {
+  emits('filterUsers', params);
+}
 const setInputValue = (value) => {
-  emits('setInputValue', value);
+  inputValue.value = value;
+  filterUsers({ type: 'setInputValue', value: inputValue.value });
 }
 const changeActiveButton = (role) => {
   buttonList.value = buttonList.value.map((button) => {
@@ -49,7 +53,7 @@ const changeActiveButton = (role) => {
     }
     return button;
   })
-  emits('setUserRole', role)
+  filterUsers({ type: 'setUserRole', value: role });
 }
 </script>
 
