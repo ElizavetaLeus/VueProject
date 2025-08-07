@@ -3,12 +3,13 @@
     <h1 :class="$style.title">Пользователи</h1>
     <div>
       <FilterUsers 
+        :class="$style.filterUsers"
         :inputValue="filters.query" 
-        @filterUsers="filterUsers($event)" 
+        @filterUsers="setFilter($event)" 
       />
       <div :class="$style.userList">
         <UserCard
-          v-for="user in userListDefault"
+          v-for="user in userList"
           :key="user.id"
           :user="user" 
         />
@@ -39,7 +40,7 @@ const filters = ref({
   role: 'all',
 })
 
-const changeFilters = (params) => {
+const setFilter = (params) => {
   if (params.type === 'setInputValue') {
     filters.value.role = params.value;
   }
@@ -47,54 +48,13 @@ const changeFilters = (params) => {
     filters.value.query = params.value;
   }
 }
-const filterUsers = (params) => {
-  changeFilters(params);
-  userListDefault.filter((user) => {
-    const userName = user.name.toLocaleLowerCase();
-    return user.role === filters.value.role || user.role === 'all' 
-    && userName.includes(filters.value.query.toLocaleLowerCase());
+
+const userList = computed(() => {
+  return userListDefault.filter((user) => {
+    return user.role === filters.value.role
+    && user.name.toLowerCase().includes(filters.value.query.toLowerCase())
   })
-  
-  // computed?
-  // const filterUsers = computed(() => { 
-  //   changeFilters();
-  //   return userListDefault.filter((user) => {
-  //     user.role === filters.value.role || user.role === 'all' 
-  //     && user.name.toLocaleLowerCase().includes(filters.value.query.toLocaleLowerCase());
-  //   })
-  // })
-
-
-  // if (params.type === 'setInputValue') {
-  //   userListDefault.filter((user) => {
-  //     return user.role === filters.value.role || user.role === 'all';
-  //   })
-  // }
-  // if (params.type === 'setUserRole') {
-  //   userListDefault.filter(user => {
-  //     // const userName = user.name.toLocaleLowerCase();
-
-  //     return userName.includes(filters.value.query.toLocaleLowerCase());
-  //   })
-  // }
-}
-
-// const filterUsersByRole = (params) => {
-//   filters.value.role = params.value;
-//   const newUserList = userListDefault.filter((user) => {
-//     return user.role === filters.value.role || user.role === 'all';
-//   })
-//   console.log(newUserList);
-  
-// }
-// const FilterUsersByText = (params) => {
-//   filters.value.query = params.value;
-//   const newUserList = userListDefault.filter(user => {
-//     const userName = user.name.toLocaleLowerCase();
-
-//     return userName.includes(filters.value.query.toLocaleLowerCase());
-//   })
-// }
+})
 
 
 </script>
@@ -104,6 +64,9 @@ const filterUsers = (params) => {
   margin-top: 74px;
   font-size: 26px;
   font-weight: 400;
+}
+.filterUsers {
+  margin-top: 40px;
 }
 .userList {
   display: grid;
