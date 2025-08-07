@@ -3,7 +3,7 @@
     <h1 :class="$style.title">Пользователи</h1>
     <div>
       <FilterUsers 
-        :inputValue="query" 
+        :inputValue="filters.query" 
         @filterUsers="filterUsers($event)" 
       />
       <div :class="$style.userList">
@@ -54,6 +54,16 @@ const filterUsers = (params) => {
     return user.role === filters.value.role || user.role === 'all' 
     && userName.includes(filters.value.query.toLocaleLowerCase());
   })
+  
+  // computed?
+  // const filterUsers = computed(() => { 
+  //   changeFilters();
+  //   return userListDefault.filter((user) => {
+  //     user.role === filters.value.role || user.role === 'all' 
+  //     && user.name.toLocaleLowerCase().includes(filters.value.query.toLocaleLowerCase());
+  //   })
+  // })
+
 
   // if (params.type === 'setInputValue') {
   //   userListDefault.filter((user) => {
